@@ -7,12 +7,11 @@ import pymongo
 
 def init_browser():
     executable_path = {"executable_path": "/usr/local/bin/chromedriver"}
-    return Browser("chrome", **executable_path, headless=False)
+    return Browser("chrome", **executable_path, headless=True)
 
 def scrape():
-	browser = init_browser()
-    mars_data = {}
-
+    browser = init_browser()
+    
     ## ======Scraping Mars News====== ##
     url = 'https://mars.nasa.gov/news'
     browser.visit(url)
@@ -99,4 +98,10 @@ def scrape():
             "hemisphere_images": hemisphere_image_urls
         }
 
+# Close the browser after scraping
+    browser.quit()
+    print(mars_dict)
     return mars_dict
+
+init_browser()
+scrape()
