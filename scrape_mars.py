@@ -21,7 +21,7 @@ def scrape():
 
     # Retrieve News title and News text
     news_title = news_soup.find_all('div', class_='content_title')[0].text
-    news_p = news_soup.find_all('div', class_='article_teaser_body')[0].text
+    news_para = news_soup.find_all('div', class_='article_teaser_body')[0].text
 
     ## ======Scraping Mars Feature Image====== ##
     image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -49,7 +49,7 @@ def scrape():
     mars_facts.columns = ["Description", "Value"]
 
     mars_html_table = mars_facts.to_html()
-    mars_html_table.replace('\n', '')
+    mars_html_table = mars_html_table.replace('\n', '')
 
     ## ======Scraping Mars Hemisphere name and image====== ##
     hemispheres_url = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
@@ -92,7 +92,7 @@ def scrape():
     ## ======Set up the dictionary====== ##
     mars_dict = {
             "news_title": news_title,
-            "news_p": news_p,
+            "news_para": news_para,
             "featured_image_url": featured_image_url,
             "fact_table": str(mars_html_table),
             "hemisphere_images": hemisphere_image_urls
