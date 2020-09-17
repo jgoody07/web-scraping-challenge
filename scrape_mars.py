@@ -16,6 +16,8 @@ def scrape():
     url = 'https://mars.nasa.gov/news'
     browser.visit(url)
 
+    browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
+    
     html = browser.html
     news_soup = BeautifulSoup(html, 'html.parser')
 
