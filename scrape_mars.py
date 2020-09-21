@@ -17,13 +17,15 @@ def scrape():
     browser.visit(url)
 
     browser.is_element_present_by_css("ul.item_list li.slide", wait_time=1)
-    
+
     html = browser.html
     news_soup = BeautifulSoup(html, 'html.parser')
 
     # Retrieve News title and News text
-    news_title = news_soup.find_all('div', class_='content_title')[0].text
-    news_para = news_soup.find_all('div', class_='article_teaser_body')[0].text
+    news_title = news_soup.find_all('div', class_="list_text")[0]
+    news_title = news_title.find(class_="content_title").text
+    news_para = news_soup.find_all("div", class_="article_teaser_body")[0].text
+
 
     ## ======Scraping Mars Feature Image====== ##
     image_url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
